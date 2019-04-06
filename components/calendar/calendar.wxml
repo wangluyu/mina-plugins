@@ -1,0 +1,37 @@
+<!--plugin/components/calendar/calendar.wxml-->
+<view class="cu-modal {{show ? 'show' : ''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">{{title}}</view>
+      <view class="action" bindtap="hide">
+        <text class="icon-close text-red"></text>
+      </view>
+    </view>
+    <view class='calendar bg-white'>
+      <view class="title bg-white text-{{color}}">
+        <view class="margin-bottom flex align-center justify-between">
+          <view class='padding'>
+            <button class="cu-btn icon icon-back bg-{{color}}" bindtap='lastMonth'></button>
+          </view>
+          <text class="padding text-xl">{{year}}年{{month}}月</text>
+          <view class='padding'>
+            <button class="cu-btn icon icon-right bg-{{color}}" bindtap='nextMonth'></button>
+          </view>
+        </view>
+      </view>
+      <view class='date'>
+        <view class='week grid col-7 text-center'>
+          <view wx:for='{{week}}' wx:key='index' class='padding-sm {{(index == todayIndex) && isTodayWeek ? "line-cyan" : ""}}'>{{item}}
+          </view>
+        </view>
+        <view class='day grid col-7 text-center'>
+          <view class="padding-sm" wx:for='{{day_list}}' wx:key>
+            <button wx:if="{{item.day > 0}}" class='cu-btn icon {{(item.timestamp >= start && item.timestamp <= end) ? "bg-cyan" : "bg-white"}}' data-time='{{item.timestamp}}' bindtap="selectDays">
+              {{item.day}}
+            </button>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
