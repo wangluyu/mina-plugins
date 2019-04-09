@@ -5,7 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    show: true,
+    start: 0,
+    end: 0
   },
 
   /**
@@ -65,6 +67,12 @@ Page({
   },
 
   showCalendar() {
-    this.calendar.show()
+    this.setData({
+      show: true
+    })
+  },
+  getSelected(e) {
+    let data = e.detail
+    console.log(data)
   }
 })

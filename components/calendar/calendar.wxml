@@ -21,12 +21,13 @@
       </view>
       <view class='date'>
         <view class='week grid col-7 text-center'>
-          <view wx:for='{{week}}' wx:key='index' class='padding-sm {{(index == todayIndex) && isTodayWeek ? "line-cyan" : ""}}'>{{item}}
+          <view wx:for='{{week}}' wx:key='index' class='padding-sm'>
+            {{item}}
           </view>
         </view>
         <view class='day grid col-7 text-center'>
           <view class="padding-sm" wx:for='{{day_list}}' wx:key>
-            <button wx:if="{{item.day > 0}}" class='cu-btn icon {{(item.timestamp >= start && item.timestamp <= end) ? "bg-cyan" : "bg-white"}}' data-time='{{item.timestamp}}' bindtap="selectDays">
+            <button wx:if="{{item.day > 0}}" class='cu-btn icon bg-{{(item.timestamp >= start && item.timestamp <= end) ? color : "white"}}' data-time='{{item.timestamp}}' bindtap="selectDays">
               {{item.day}}
             </button>
           </view>

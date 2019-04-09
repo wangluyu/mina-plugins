@@ -50,16 +50,44 @@ Component({
   },
   pageLifetimes: {
     show() {
-      let date = new Date()
+      let date = null
+      //如果未定义start,则start设为今天
+      if (this.data.start == 0) {
+        date = new Date()
+      } else {
+        date = new Date(this.data.start)
+      }
       let year = date.getFullYear()
       let month = date.getMonth() + 1
       let day = date.getDate()
       this.dateInit(year, month)
-      let timestamp = new Date(year, month - 1, day).getTime()
+      let start = new Date(year, month - 1, day).getTime()
+      
+      //如果未定义end,则end设为今天
+      if (this.data.end == 0) {
+        var end = new Date().getTime()
+      } else {
+        var end = new Date(this.data.end).getTime()
+      }
+      
       this.setData({
-        start: timestamp,
-        end: timestamp
+        start: start,
+        end: end
       })
+
+      if (this.data.start > this.data.end) {
+        console.error("start lg than end")
+      }
+    }
+  },
+  //数据舰艇
+  observers: {
+    'start, end': function (start, end) {
+      let data = {
+        start: start,
+        end: end
+      }
+      this.triggerEvent('calendar', data);
     }
   },
   /**
